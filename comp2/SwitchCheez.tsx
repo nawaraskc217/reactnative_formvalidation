@@ -10,13 +10,23 @@ export default function Forms() {
 
   const validationForm = () => {
     const errors: { username?: string; password?: string } = {};
-
-    if (!username.trim()) errors.username = "Username is required";
-    if (!password.trim()) errors.password = "Password is required";
-
+  
+    if (!username.trim()) {
+      errors.username = "Username is required";
+    } else if (username.length <= 8) {
+      errors.username = "Username must be more than 8 characters";
+    }
+  
+    if (!password.trim()) {
+      errors.password = "Password is required";
+    } else if (password.length <= 8) {
+      errors.password = "Password must be more than 8 characters";
+    }
+  
     setErrors(errors);
     return Object.keys(errors).length === 0; // Return true if no errors
   };
+  
 
   const handleSubmit = () => {
     if (validationForm()) {
